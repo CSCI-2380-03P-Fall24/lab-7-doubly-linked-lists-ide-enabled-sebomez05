@@ -1,0 +1,138 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: listSize
+      id: listsize
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: listSize
+        setup-command: ''
+        command: make test try=listSize
+        timeout: 10
+        max-score: 1
+    - name: addFront
+      id: addfront
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: addFront
+        setup-command: ''
+        command: make test try=addFront
+        timeout: 10
+    - name: addBack
+      id: addback
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: addBack
+        setup-command: ''
+        command: make test try=addBack
+        timeout: 10
+    - name: printList
+      id: printlist
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: printList
+        setup-command: ''
+        command: make test try=printList
+        timeout: 10
+        max-score: 1
+    - name: popBack
+      id: popback
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: popBack
+        setup-command: ''
+        command: make test try=popBack
+        timeout: 10
+        max-score: 1
+    - name: popFront
+      id: popfront
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: popFront
+        setup-command: ''
+        command: make test try=popFront
+        timeout: 10
+        max-score: 1
+    - name: insertStudent
+      id: insertstudent
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: insertStudent
+        setup-command: ''
+        command: make test try=insertStudent
+        timeout: 10
+        max-score: 1
+    - name: retrieveStudent
+      id: retrievestudent
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: retrieveStudent
+        setup-command: ''
+        command: make test try=retrieveStudent
+        timeout: 10
+        max-score: 1
+    - name: removeStudentById
+      id: removestudentbyid
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: removeStudentById
+        setup-command: ''
+        command: make test try=removeStudentById
+        timeout: 10
+        max-score: 1
+    - name: updateGPA
+      id: updategpa
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: updateGPA
+        setup-command: ''
+        command: make test try=updateGPA
+        timeout: 10
+        max-score: 1
+    - name: mergeList
+      id: mergelist
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: mergeList
+        setup-command: ''
+        command: make test try=mergeList
+        timeout: 10
+        max-score: 1
+    - name: honorRoll
+      id: honorroll
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: honorRoll
+        setup-command: ''
+        command: make test try=honorRoll
+        timeout: 10
+        max-score: 1
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        LISTSIZE_RESULTS: "${{steps.listsize.outputs.result}}"
+        ADDFRONT_RESULTS: "${{steps.addfront.outputs.result}}"
+        ADDBACK_RESULTS: "${{steps.addback.outputs.result}}"
+        PRINTLIST_RESULTS: "${{steps.printlist.outputs.result}}"
+        POPBACK_RESULTS: "${{steps.popback.outputs.result}}"
+        POPFRONT_RESULTS: "${{steps.popfront.outputs.result}}"
+        INSERTSTUDENT_RESULTS: "${{steps.insertstudent.outputs.result}}"
+        RETRIEVESTUDENT_RESULTS: "${{steps.retrievestudent.outputs.result}}"
+        REMOVESTUDENTBYID_RESULTS: "${{steps.removestudentbyid.outputs.result}}"
+        UPDATEGPA_RESULTS: "${{steps.updategpa.outputs.result}}"
+        MERGELIST_RESULTS: "${{steps.mergelist.outputs.result}}"
+        HONORROLL_RESULTS: "${{steps.honorroll.outputs.result}}"
+      with:
+        runners: listsize,addfront,addback,printlist,popback,popfront,insertstudent,retrievestudent,removest
