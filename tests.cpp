@@ -280,3 +280,34 @@ TEST_CASE("honorRoll") {
     honors = test2.honorRoll(0.0);
     CHECK(honors.listSize() == 4);
 }
+
+TEST_CASE("removeBelowGPA") {
+    StudentList test;
+
+    Student s1("alex", 1, 2.1);
+    Student s2("bella", 2, 3.5);
+    Student s3("chris", 3, 1.8);
+    Student s4("diana", 4, 3.0);
+    Student s5("eric", 5, 2.9);
+
+    test.addBack(s1);
+    test.addBack(s2);
+    test.addBack(s3);
+    test.addBack(s4);
+    test.addBack(s5);
+
+    CHECK(test.listSize() == 5);
+
+    // remove students below 3.0
+    test.removeBelowGPA(3.0f);
+    CHECK(test.listSize() == 2);
+
+    // verify survivors
+    Student a = test.retrieveStudent(2);
+    Student b = test.retrieveStudent(4);
+    CHECK(a.name == "bella");
+    CHECK(b.name == "diana");
+
+    // removing again shouldn’t break
+    CHECK_NOTHROW(test.removeBelowGPA(3.0f));
+}

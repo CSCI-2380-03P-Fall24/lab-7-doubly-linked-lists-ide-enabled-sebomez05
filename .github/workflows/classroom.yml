@@ -119,6 +119,15 @@ jobs:
         command: make test try=honorRoll
         timeout: 10
         max-score: 1
+    - name: removeBelowGPA
+      id: removebelowgpa
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: removeBelowGPA
+        setup-command: ''
+        command: make test try=removeBelowGPA
+        timeout: 10
+        max-score: 1
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
@@ -134,5 +143,6 @@ jobs:
         UPDATEGPA_RESULTS: "${{steps.updategpa.outputs.result}}"
         MERGELIST_RESULTS: "${{steps.mergelist.outputs.result}}"
         HONORROLL_RESULTS: "${{steps.honorroll.outputs.result}}"
+        REMOVEBELOWGPA_RESULTS: "${{steps.removebelowgpa.outputs.result}}"
       with:
-        runners: listsize,addfront,addback,printlist,popback,popfront,insertstudent,retrievestudent,removestudentbyid,updategpa,mergelist,honorroll
+        runners: listsize,addfront,addback,printlist,popback,popfront,insertstudent,retrievestudent,removestudentbyid,updategpa,mergelist,honorroll,removebelowgpa

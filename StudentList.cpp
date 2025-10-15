@@ -70,3 +70,11 @@
 		StudentList fixthis;
 		return fixthis;
 	}
+
+	//remove all students whose GPA is below a given threshold.
+	// For example, if threshold = 3.0, all students with GPA less than 3.0
+	// should be removed from the list. 
+	// Be sure to correctly update both head and tail pointers when removing 
+	// from the front or back, and adjust numStudents accordingly.
+	// If the list is empty, print a message and do nothing.
+	void StudentList::removeBelowGPA(float threshold) {}

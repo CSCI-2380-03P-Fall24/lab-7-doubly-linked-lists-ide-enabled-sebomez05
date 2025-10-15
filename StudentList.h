@@ -51,4 +51,5 @@ class StudentList {
 		void updateGPA(int idnumber, float newGPA);
 		void mergeList(StudentList &otherlist);
 		StudentList honorRoll(float minGPA);
+		void removeBelowGPA(float threshold);
 };
